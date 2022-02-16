@@ -94,14 +94,14 @@ class MainFragment : Fragment() {
             photoAdapter.refresh()
         }
         btSearch.setOnClickListener {
-            viewModel.searchPhotos(etSearchText.text.toString())
+            executeSearch()
         }
         etSearchText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO ||
                 actionId == EditorInfo.IME_ACTION_SEARCH ||
                 actionId == EditorInfo.IME_ACTION_DONE
             ) {
-                viewModel.searchPhotos(etSearchText.text.toString())
+                executeSearch()
                 true
             } else {
                 false
@@ -111,7 +111,7 @@ class MainFragment : Fragment() {
             if (event.action == KeyEvent.ACTION_DOWN &&
                 event.keyCode == KeyEvent.KEYCODE_ENTER
             ) {
-                viewModel.searchPhotos(etSearchText.text.toString())
+                executeSearch()
             }
             true
         }
@@ -123,6 +123,11 @@ class MainFragment : Fragment() {
                 photoAdapter.submitData(it)
             }
         }
+    }
+
+    private fun executeSearch() {
+        viewModel.searchPhotos(binding.etSearchText.text.toString())
+        binding.swipeRefresh.isRefreshing = true
     }
 
     private fun onMainBreedClick(item: Photo, sharedImageView: ImageView, transitionName: String) {
