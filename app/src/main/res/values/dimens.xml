@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="photo_size">400dp</dimen>
+
+    <dimen name="search_btn_margin_horizontal">30dp</dimen>
+</resources>
